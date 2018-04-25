@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
   import BScroll from 'better-scroll'
 
   const DIRECTION_H = 'horizontal'
@@ -46,28 +45,49 @@
         default: DIRECTION_V
       }
     },
-    mounted(){
+    mounted() {
       setTimeout(() => {
         this._initScroll()
-      })
+      }, 20)
     },
     methods: {
-      _initScroll(){
-        if(!this.$refs.wrapper){
-          return 
+      _initScroll() {
+        if (!this.$refs.wrapper) {
+          return
         }
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
-          click: this.click
+          click: this.click,
+          eventPassthrough: this.direction === DIRECTION_V ? DIRECTION_H : DIRECTION_V
         })
+
+        if (this.listenScroll) {
+          this.scroll.on('scroll', (pos) => {
+            this.$emit('scroll', pos)
+          })
+        }
+
+        if (this.pullup) {
+          this.scroll.on('scrollEnd', () => {
+            if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
+              this.$emit('scrollToEnd')
+            }
+          })
+        }
+
+        if (this.beforeScroll) {
+          this.scroll.on('beforeScrollStart', () => {
+            this.$emit('beforeScroll')
+          })
+        }
       },
-      enable(){
-        this.scroll && this.scroll.enable()
-      },
-      disable(){
+      disable() {
         this.scroll && this.scroll.disable()
       },
-      refresh(){
+      enable() {
+        this.scroll && this.scroll.enable()
+      },
+      refresh() {
         this.scroll && this.scroll.refresh()
       },
       scrollTo() {
@@ -78,7 +98,7 @@
       }
     },
     watch: {
-      data(){
+      data() {
         setTimeout(() => {
           this.refresh()
         }, this.refreshDelay)
@@ -87,6 +107,6 @@
   }
 </script>
 
-<style lang="stylus">
-    
+<style scoped lang="stylus" rel="stylesheet/stylus">
+
 </style>

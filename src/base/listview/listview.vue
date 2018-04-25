@@ -42,6 +42,10 @@
   const ANCHOR_HEIGHT = 18
 
   export default {
+    components: {
+      Scroll,
+      Loading
+    },
     props: {
       data: {
         type: Array,
@@ -75,6 +79,7 @@
       this.listHeight = []
     },
     methods: {
+      // 选择列表
       selectItem(item) {
         this.$emit('select', item)
       },
@@ -155,14 +160,9 @@
         if (this.fixedTop === fixedTop) {
           return
         }
-        console.log(newVal)
         this.fixedTop = fixedTop
         this.$refs.fixed.style.transform = `translate3d(0,${fixedTop}px,0)`
       }
-    },
-    components: {
-      Scroll,
-      Loading
     }
   }
 

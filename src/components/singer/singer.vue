@@ -1,6 +1,6 @@
 <template>
   <div class="singer" ref="singer">
-    <list-view  :data="singers" ref="list"></list-view>
+    <list-view @select="selectSinger" :data="singers" ref="list"></list-view>
     <router-view></router-view>
   </div>
 </template>
@@ -29,6 +29,13 @@
       this._getSingerList()
     },
     methods: {
+      // 选择歌手
+      selectSinger(singer) {
+        this.$router.push({
+          path: `/singer/${singer.id}`
+        })
+        // this.setSinger(singer)
+      },
       // 获取歌手列表
       _getSingerList(){
         getSingerList().then((res) => {
