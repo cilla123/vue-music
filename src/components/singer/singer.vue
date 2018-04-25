@@ -12,6 +12,7 @@
   import { ERR_OK } from 'api/config'
   import Singer from 'common/js/singer'
   import ListView from 'base/listview/listview'
+  import { mapMutations } from 'vuex'
 
   const HOT_SINGER_LEN = 10
   const HOT_NAME = '热门'
@@ -34,7 +35,7 @@
         this.$router.push({
           path: `/singer/${singer.id}`
         })
-        // this.setSinger(singer)
+        this.setSinger(singer)
       },
       // 获取歌手列表
       _getSingerList(){
@@ -86,7 +87,11 @@
           return a.title.charCodeAt(0) - b.title.charCodeAt(0)
         })
         return hot.concat(ret)
-      }
+      },
+      // vuex
+      ...mapMutations({
+        setSinger: 'SET_SINGER'
+      })
     }
   }
 </script>
