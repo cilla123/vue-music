@@ -1,3 +1,7 @@
+import { getSongsUrl } from 'api/song'
+import { ERR_OK } from 'api/config'
+
+
 /**
  * 歌曲类
  */
@@ -28,9 +32,7 @@ export function createSong(musicData) {
     album: musicData.albumname,
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    // url: musicData.url
-    // url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=38`
-    url: `http://isure.stream.qqmusic.qq.com/C100${musicData.songmid}.m4a?fromtag=32`  
+    url: musicData.url
   })
 }
 
