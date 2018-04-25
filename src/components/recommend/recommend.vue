@@ -66,7 +66,7 @@
       _getRecommend(){
         getRecommend().then((result) => {
           if (result.code === ERR_OK) {
-            console.log(result.data.slider)
+            // console.log(result.data.slider)
             this.recommends = result.data.slider
           }
         }).catch((err) => {
@@ -77,7 +77,7 @@
       _getDiscList(){
         getDiscList().then((result) => {    
           if (result.code === ERR_OK) {
-            console.log(result.data.list)
+            // console.log(result.data.list)
             this.discList = result.data.list
           }
         }).catch((err) => {
