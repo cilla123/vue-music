@@ -1,10 +1,5 @@
 <template>
-  <scroll @scroll="scroll"
-          :listen-scroll="listenScroll"
-          :probe-type="probeType"
-          :data="data"
-          class="listview"
-          ref="listview">
+  <scroll @scroll="scroll" :listen-scroll="listenScroll" :probe-type="probeType" :data="data" class="listview" ref="listview">
     <ul>
       <li v-for="group in data" class="list-group" ref="listGroup">
         <h2 class="list-group-title">{{group.title}}</h2>
